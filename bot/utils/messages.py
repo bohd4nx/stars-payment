@@ -1,7 +1,3 @@
-"""
-Messages module for storing all bot message templates.
-"""
-
 PAYMENT_SUCCESS = (
     "🎉 <b>Payment successful!</b>\n"
     "💲 <b>Amount:</b> {amount}⭐️\n"
