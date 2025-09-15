@@ -1,15 +1,4 @@
-from .messages import (
-    PAYMENT_SUCCESS,
-    PAYMENT_ERROR,
-    REFUND_SUCCESS,
-    REFUND_FAIL,
-    INVALID_COMMAND
-)
+from .messages import MESSAGES
+from .errors import get_error_message
 
-__all__ = [
-    'PAYMENT_SUCCESS',
-    'PAYMENT_ERROR',
-    'REFUND_SUCCESS',
-    'REFUND_FAIL',
-    'INVALID_COMMAND'
-]
+__all__ = ['MESSAGES', 'get_error_message']

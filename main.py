@@ -4,7 +4,7 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 
-from bot.examples import payment_router, refund_router
+from bot.methods import payment_router, refund_router, balance_router
 from config import API_TOKEN
 
 logging.basicConfig(
@@ -18,8 +18,14 @@ dispatcher_logger.setLevel(logging.INFO)
 bot = Bot(token=API_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 
-dp.include_router(payment_router)
-dp.include_router(refund_router)
+routers = {
+    "payment": payment_router,
+    "refund": refund_router,
+    "balance": balance_router,
+}
+
+for router in routers.values():
+    dp.include_router(router)
 
 
 async def main():

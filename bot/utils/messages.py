@@ -1,11 +1,16 @@
-PAYMENT_SUCCESS = (
-    "🎉 <b>Payment successful!</b>\n"
-    "💲 <b>Amount:</b> {amount}⭐️\n"
-    "🆔 <b>Transaction ID:</b> <code>{transaction_id}</code>"
-)
-
-PAYMENT_ERROR = "❌ <b>Failed to create payment invoice</b>"
-REFUND_SUCCESS = "✅ <b>Payment has been successfully refunded!</b>"
-REFUND_FAIL = "❌ <b>Failed to refund payment</b>"
-INVALID_COMMAND = ("❌ <b>Please use format:</b> /refund '&lt;transaction_id&gt;'\n"
-                   "Example: <code>/refund ABC123XYZ</code>")
+MESSAGES = {
+    "payment": {
+        "success": "🎉 <b>Payment successful!</b>\n💵 <b>Amount:</b> {amount}⭐️\n🆔 <b>Transaction ID:</b> <code>{transaction_id}</code>",
+        "error": "❌ <b>Failed to create payment invoice</b>"
+    },
+    "refund": {
+        "success": "✅ <b>Payment has been successfully refunded!</b>",
+        "error": "❌ <b>Failed to refund payment</b>: <pre>{error}</pre>"
+    },
+    "command": {
+        "invalid": "❌ <b>Please use format:</b> /refund '&lt;user_id&gt;' '&lt;transaction_id&gt;'\nℹ️ Example: <code>/refund 123456789 ABC123XYZ</code>"
+    },
+    "balance": {
+        "info": "💰 <b>Bot balance (@{username}):</b> {amount}⭐️"
+    }
+}
