@@ -3,8 +3,14 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
+from aiogram_i18n import I18nMiddleware
+from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
 
-from bot.methods import payment_router, refund_router, balance_router
+from bot.commands import start_router
+from bot.commands.balance import router as balance_router
+from bot.commands.refund import router as refund_router
+from bot.handlers.payment import router as payment_handlers_router
 from config import API_TOKEN
 
 logging.basicConfig(
@@ -15,17 +21,30 @@ logging.basicConfig(
 dispatcher_logger = logging.getLogger('aiogram.dispatcher')
 dispatcher_logger.setLevel(logging.INFO)
 
-bot = Bot(token=API_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+bot = Bot(
+    token=API_TOKEN,
+    default=DefaultBotProperties(
+        parse_mode=ParseMode.HTML,
+        link_preview_is_disabled=True
+    )
+)
 dp = Dispatcher()
 
-routers = {
-    "payment": payment_router,
-    "refund": refund_router,
-    "balance": balance_router,
-}
+i18n_middleware = I18nMiddleware(
+    core=FluentRuntimeCore(path="locales/{locale}"),
+    default_locale="en"
+)
 
-for router in routers.values():
-    dp.include_router(router)
+dp.include_router(start_router)
+dp.include_router(payment_handlers_router)
+dp.include_router(balance_router)
+dp.include_router(refund_router)
+
+dp.update.middleware(i18n_middleware)
+dp.message.middleware(i18n_middleware)
+dp.callback_query.middleware(i18n_middleware)
+
+i18n_middleware.setup(dispatcher=dp)
 
 
 async def main():
