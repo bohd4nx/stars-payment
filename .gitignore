@@ -25,6 +25,16 @@ venv/
 .venv/
 env/
 
+# Database
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+
 # IDE
 .vscode/
 .idea/

@@ -4,7 +4,7 @@
    <h1 style="margin-top: 24px; font-size:42px;">Telegram Stars Payment Bot</h1>
 
    <p style="font-size:18px; color:#555; max-width:640px; line-height:1.4;">
-      <strong>Process Telegram Stars payments, issue refunds, and monitor bot balance with localized error handling.</strong>
+      <strong>Reference integration for Telegram Stars payments: invoices, refunds, paid media, and balance checks.</strong>
    </p>
 
    <p>
@@ -20,11 +20,12 @@
 
 ## Features
 
-- Create Stars payment invoice via `/start`
-- Alternative: generate payment link (commented example in `payment.py`)
-- Perform refunds with `/refund <user_id> <transaction_id>`
-- View bot Stars balance using `/balance`
-- Clear, structured refund error messages (Telegram charge status aware)
+- Example of Stars payment flow using `/pay <amount>`
+- Optional payment link flow (commented in `payment.py`)
+- Refund a specific payment with `/refund <user_id> <transaction_id>`
+- Check bot balance with `/balance`
+- Send paid media with `/paid_media <amount>`
+- Batch refund user transactions with `/refund_user <user_id>`
 
 ## Screenshot / Example
 
@@ -44,10 +45,10 @@ pip install -r requirements.txt
 
 ### 2. Configuration
 
-Edit `config.py`:
+Create `.env` from `.env.example` and set:
 
-```python
-API_TOKEN = "your_bot_token_here"  # Obtain at @BotFather
+```env
+BOT_TOKEN=your_bot_token_here
 ```
 
 ### 3. Run
@@ -59,10 +60,13 @@ python main.py
 ## Commands
 
 | Command                              | Description                             |
-| ------------------------------------ | --------------------------------------- |
-| `/start`                             | Send a Stars payment invoice            |
-| `/refund <user_id> <transaction_id>` | Attempt refund of a prior Stars payment |
-| `/balance`                           | Show current Stars balance of the bot   |
+|--------------------------------------|-----------------------------------------|
+| `/start`                             | Show integration overview               |
+| `/pay <amount>`                      | Create a Stars invoice                  |
+| `/refund <user_id> <transaction_id>` | Refund a specific Stars payment         |
+| `/balance`                           | Show current Stars balance              |
+| `/paid_media <amount>`               | Send paid media with Stars price        |
+| `/refund_user <user_id>`             | Refund all refundable user transactions |
 
 ---
 

@@ -8,6 +8,7 @@ router = Router(name=__name__)
 
 @router.message(Command("balance"))
 async def process_balance(message: Message, bot: Bot, i18n: I18nContext) -> None:
+    """Send the bot's current Stars balance."""
     balance = await bot.get_my_star_balance()
     me = await bot.me()
     await message.reply(
